@@ -129,8 +129,12 @@ describe('convertNumber', () => {
       expected: 'forty'
     },
     {
-      number: 43,
-      expected: 'forty-three'
+      number: 42,
+      expected: 'forty-two'
+    },
+    {
+      number: '42',
+      expected: 'forty-two'
     },
     {
       number: 50,
