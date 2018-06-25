@@ -10,7 +10,7 @@ class NumberInput extends Component {
   handleChange = event => {
     const value = event.target.value
     this.setState({ value })
-    this.props.onChange(value)
+    this.props.onChange(+value)
   }
 
   render() {
@@ -22,7 +22,6 @@ class NumberInput extends Component {
           step="1"
           value={this.state.value}
           onChange={this.handleChange}
-          placeholder="your favourite number"
         />
       </div>
     )

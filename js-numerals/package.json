@@ -4,7 +4,7 @@
   "description": "number converter",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch",
+    "test": "jest --watch ./src/**",
     "dev": "parcel src/index.html"
   },
   "author": "Attila Polgar",
