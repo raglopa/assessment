@@ -61,7 +61,7 @@ describe('convertNumber', () => {
     },
     {
       number: 12,
-      expected: 'twelwe'
+      expected: 'twelve'
     }
   ]
 
@@ -126,11 +126,11 @@ describe('convertNumber', () => {
     },
     {
       number: 40,
-      expected: 'fourty'
+      expected: 'forty'
     },
     {
       number: 43,
-      expected: 'fourty-three'
+      expected: 'forty-three'
     },
     {
       number: 50,
@@ -176,6 +176,57 @@ describe('convertNumber', () => {
 
   under100Numbers.forEach(item => {
     test(`should convert numbers under 100 correctly: '${item.number}'`, () => {
+      expect(convertNumber(item.number)).toEqual(item.expected)
+    })
+  })
+  const under1000Numbers = [
+    {
+      number: 100,
+      expected: 'one hundred'
+    },
+    {
+      number: 101,
+      expected: 'one hundred and one'
+    },
+    {
+      number: 200,
+      expected: 'two hundred'
+    }
+  ]
+
+  under1000Numbers.forEach(item => {
+    test(`should convert numbers under 1000 correctly: '${
+      item.number
+    }'`, () => {
+      expect(convertNumber(item.number)).toEqual(item.expected)
+    })
+  })
+  const thousandNumbers = [
+    {
+      number: 1000,
+      expected: 'ten hundred'
+    },
+    {
+      number: 2001,
+      expected: 'two thousand and one'
+    },
+    {
+      number: 1999,
+      expected: 'nineteen hundred and ninety-nine'
+    },
+    {
+      number: 17999,
+      expected: 'seventeen thousand nine hundred and ninety-nine'
+    },
+    {
+      number: 17999666,
+      expected:
+        'seventeen million nine hundred and ninety-nine thousand six hundred and sixty-six'
+    }
+  ]
+
+  thousandNumbers.forEach(item => {
+    test(`should convert thousand numbers correctly: '${item.number}'`, () => {
       expect(convertNumber(item.number)).toEqual(item.expected)
     })
   })
