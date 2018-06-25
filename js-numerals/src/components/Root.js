@@ -1,3 +1,12 @@
 import React from 'react'
+import NumberInput from './NumberInput'
+import ResultDisplay from './ResultDisplay'
 
-export default () => <div>hello</div>
+export default () => (
+  <div>
+    <div>
+      <NumberInput />
+      <ResultDisplay />
+    </div>
+  </div>
+)
