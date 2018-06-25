@@ -1,5 +1,9 @@
 import React from 'react'
 import './style.scss'
-export default () => (
-  <div id="result-display">seventeen thousand nine hundred and ninety-nine</div>
-)
+
+import convertNumber from './convert-number'
+
+export default ({ number }) => {
+  const convertedNumber = convertNumber(number)
+  return <div id="result-display">{convertedNumber}</div>
+}
