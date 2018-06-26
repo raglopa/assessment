@@ -16,6 +16,10 @@ describe('convertNumber', () => {
       expected: 'zero'
     },
     {
+      number: '0',
+      expected: 'zero'
+    },
+    {
       number: 1,
       expected: 'one'
     },

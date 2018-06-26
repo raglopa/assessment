@@ -30,5 +30,7 @@ const spellLargeNumber = number =>
     .join(' ')
     .trim()
 
-export default number =>
-  number < 2000 ? spellThreeDigitNumber(number) : spellLargeNumber(number)
+export default number => {
+  const n = parseInt(number)
+  return n < 2000 ? spellThreeDigitNumber(n) : spellLargeNumber(n)
+}
