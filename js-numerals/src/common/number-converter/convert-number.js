@@ -1,84 +1,34 @@
-import { baseNumbers, numberGroups } from './config'
+import { numberGroups } from './config'
+import spellThreeDigitNumber from './spell-three-digit-number'
 
-const createNumberSpeller = baseNumbers => {
-  const spellBaseNumber = number => baseNumbers[number].spell
-
-  const spellGeneralTwoDigitNumber = number => {
-    const tens = parseInt(number / 10)
-    const base = number % 10
-    return `${baseNumbers[tens].tens}${
-      base > 0 ? '-' + spellBaseNumber(base) : ''
-    }`
+const numberReducer = (acc, curr, i) => [
+  ...acc,
+  {
+    label: curr,
+    divider: Math.pow(1000, i)
   }
+]
 
-  const spellTwoDigitNumber = number =>
-    number < 20 ? spellBaseNumber(number) : spellGeneralTwoDigitNumber(number)
-
-  const spellThreeDigitNumber = number => {
-    let spelled = ''
-    if (number === 0) {
-      spelled = spellBaseNumber(number)
-    } else {
-      const hundreds = parseInt(number / 100)
-      const remains = number % 100
-      const spelledHundreds = hundreds
-        ? `${spellTwoDigitNumber(hundreds)} hundred`
-        : ''
-      const spelledTens = remains > 0 ? spellTwoDigitNumber(remains) : ''
-      const and = spelledTens && spelledHundreds ? 'and' : ''
-
-      spelled = [spelledHundreds, and, spelledTens].filter(i => i).join(' ')
-    }
-    return spelled
-  }
-
-  const createNumberObj = (number, numberGroups) =>
-    numberGroups
-      .map(group => {
-        const _number = number % group.remainer
-        const value =
-          _number >= group.divider ? parseInt(_number / group.divider) : 0
-        return {
-          ...group,
-          number,
-          value,
-          spelled: `${spellThreeDigitNumber(value)} ${group.label}`
-        }
-      })
-      .filter(group => group.value > 0)
-
-  const withAnd = numberConfig => {
-    let number = [...numberConfig]
-    const hundredPart = numberConfig.find(g => g.id === 'hundred')
-    const shouldAddConjunction =
-      hundredPart && hundredPart.value < 100 && numberConfig.length > 1
-
-    if (shouldAddConjunction) {
-      const newHundredPart = {
-        ...hundredPart,
-        spelled: `and ${hundredPart.spelled}`
-      }
-      number = [...numberConfig.slice(0, -1), newHundredPart]
-    }
-    return number
-  }
-
-  const spell = numberObj =>
-    numberObj
-      .map(group => group.spelled)
-      .join(' ')
-      .trim()
-
-  const spellLargeNumber = (number, numberGroups) => {
-    let numberObj = createNumberObj(number, numberGroups)
-    numberObj = withAnd(numberObj)
-    return spell(numberObj)
-  }
-
-  return number =>
-    number < 2000
-      ? spellThreeDigitNumber(number)
-      : spellLargeNumber(number, numberGroups)
+const numberMap = n => (group, i, array) => {
+  const number = n % (group.divider * 1000)
+  const value = number >= group.divider ? parseInt(number / group.divider) : 0
+  const shouldAddConjunction =
+    group.label === '' && value < 100 && array.length > 1
+  return value
+    ? `${shouldAddConjunction ? 'and ' : ''}${spellThreeDigitNumber(value)} ${
+        group.label
+      }`
+    : ''
 }
 
-export default createNumberSpeller(baseNumbers)
+const spellLargeNumber = number =>
+  numberGroups
+    .reduce(numberReducer, [])
+    .reverse()
+    .map(numberMap(number))
+    .filter(s => s)
+    .join(' ')
+    .trim()
+
+export default number =>
+  number < 2000 ? spellThreeDigitNumber(number) : spellLargeNumber(number)
