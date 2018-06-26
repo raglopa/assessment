@@ -10,7 +10,10 @@ class NumberInput extends Component {
   handleChange = event => {
     const value = event.target.value
     this.setState({ value })
-    this.props.onChange(+value)
+  }
+
+  submit = () => {
+    this.props.onChange(this.state.value)
   }
 
   render() {
@@ -23,6 +26,7 @@ class NumberInput extends Component {
           value={this.state.value}
           onChange={this.handleChange}
         />
+        <button onClick={this.submit}>convert</button>
       </div>
     )
   }

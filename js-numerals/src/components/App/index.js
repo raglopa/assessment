@@ -4,7 +4,7 @@ import ResultDisplay from '../ResultDisplay'
 import './style.scss'
 
 class App extends Component {
-  state = { number: 6 }
+  state = { number: '' }
 
   onNumberChange = number => {
     this.setState({ number })
