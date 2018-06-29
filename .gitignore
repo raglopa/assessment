@@ -1,3 +1,8 @@
 js-numerals/node_modules
 js-numerals/dist
 js-numerals/.cache
+
+ios-github/node_modules
+ios-github/.expo
+
+*.log
