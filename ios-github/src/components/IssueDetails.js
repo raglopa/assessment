@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import {
   Container,
   Content,
@@ -19,20 +19,20 @@ export default class IssueDetails extends Component {
       <Container>
         <Content>
           <Card>
-            <CardItem header>
-              <Text>#{issue.number}</Text>
+            <CardItem header style={styles.cardItem}>
+              <Text>{issue.title}</Text>
+            </CardItem>
+            <CardItem style={styles.cardItem}>
+              <Thumbnail small square source={{ uri: issue.user.avatar_url }} />
+              <Text style={styles.userName}> {issue.user.login} </Text>
+              <Text> opened this issue</Text>
+            </CardItem>
+            <LabelList labels={issue.labels} />
+            <CardItem style={styles.cardItem}>
               <Text>{issue.created_at}</Text>
             </CardItem>
-            <CardItem>
-              <Body>
-                <Text>{issue.title}</Text>
-                <Text>#{issue.number}</Text>
-                <Text>{issue.created_at}</Text>
-                {issue.user && <Text>user: {issue.user.login}</Text>}
-                <Thumbnail square source={{ uri: issue.user.avatar_url }} />
-                {issue.labels && <LabelList labels={issue.labels} />}
-                <Text>{issue.body}</Text>
-              </Body>
+            <CardItem style={styles.cardItem}>
+              <Text>{issue.body}</Text>
             </CardItem>
           </Card>
         </Content>
@@ -41,7 +41,12 @@ export default class IssueDetails extends Component {
   }
 }
 
-// - labels with the correct color
-// - description
-// 	- only the text part is required
-// 	- but fell free to go with markdown rendering, code highlight and images if you like
+const styles = StyleSheet.create({
+  cardItem: {
+    borderBottomWidth: 1,
+    borderColor: 'rgba(0,0,0,0.2)'
+  },
+  userName: {
+    fontWeight: 'bold'
+  }
+})
