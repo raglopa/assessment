@@ -1,23 +1,38 @@
 import React, { Component } from 'react'
-import { Text, View, Button } from 'react-native'
+import { Button } from 'react-native'
 import { connect } from 'react-redux'
+import { Container, Header, Content, Text } from 'native-base'
 
 import { updateIssuesRequested } from './actions'
+import IssueList from '../../components/IssueList'
 
 class IssueListScreen extends Component {
   updateIssues = () => {
     console.log('updateIssues')
     this.props.updateIssues()
   }
+
+  componentDidMount = () => {
+    this.updateIssues()
+  }
+
+  handleIssueSelect = issue => {
+    const { navigation } = this.props
+    navigation.navigate('IssueDetailsScreen', { issue })
+  }
+
   render() {
     return (
-      <View>
-        <Text>issue list screen</Text>
-        <Button onPress={this.updateIssues} title="refresh" />
-        {this.props.pending && <Text>loading issues...</Text>}
-        {this.props.failed && <Text>something went wrong...</Text>}
-        {this.props.issues.map(issue => <Text key={issue.id}>{issue.id}</Text>)}
-      </View>
+      <Container>
+        <Content>
+          {this.props.pending && <Text>loading issues...</Text>}
+          {this.props.failed && <Text>something went wrong...</Text>}
+          <IssueList
+            issues={this.props.issues}
+            onIssueSelect={this.handleIssueSelect}
+          />
+        </Content>
+      </Container>
     )
   }
 }
@@ -25,7 +40,8 @@ class IssueListScreen extends Component {
 const mapStateToProps = state => ({
   issues: state.data.issues,
   pending: state.data.requestState.pending,
-  failed: state.data.requestState.failed
+  failed: state.data.requestState.failed,
+  success: state.data.requestState.success
 })
 
 const mapDispatchToProps = dispatch => ({
