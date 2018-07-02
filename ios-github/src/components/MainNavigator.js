@@ -9,15 +9,15 @@ const MainNavigator = createStackNavigator(
   {
     IssueListScreen: {
       screen: IssueListScreen,
-      navigationOptions: ({ navigation }) => ({
+      navigationOptions: {
         title: `Issues`,
         headerRight: <IssueFilter />
-      })
+      }
     },
     IssueDetailsScreen: {
       screen: IssueDetailsScreen,
       navigationOptions: ({ navigation }) => ({
-        title: `Issue #${navigation.state.params.issue.id}`
+        title: `Issue #${navigation.state.params.issue.number}`
       })
     }
   },

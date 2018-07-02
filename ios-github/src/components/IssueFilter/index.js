@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, Button } from 'react-native'
+import { Button } from 'react-native'
 import { connect } from 'react-redux'
 
 import { issueStatusFilterChanged } from './actions'

@@ -1,18 +1,14 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import { ActivityIndicator, View } from 'react-native'
 import { Container, Content, Text } from 'native-base'
+import { connect } from 'react-redux'
 
 import { updateIssuesRequested } from './actions'
 import IssueList from '../../components/IssueList'
 
 class IssueListScreen extends Component {
-  updateIssues = () => {
-    console.log('updateIssues')
-    this.props.updateIssues({ state: this.props.statusFilter })
-  }
-
   componentDidMount = () => {
-    this.updateIssues()
+    this.props.updateIssues({ state: this.props.statusFilter })
   }
 
   handleIssueSelect = issue => {
@@ -24,7 +20,9 @@ class IssueListScreen extends Component {
     return (
       <Container>
         <Content>
-          {this.props.pending && <Text>loading issues...</Text>}
+          {this.props.pending && (
+            <ActivityIndicator size="large" color="#0000ff" />
+          )}
           {this.props.failed && <Text>something went wrong...</Text>}
           {this.props.success && (
             <IssueList
