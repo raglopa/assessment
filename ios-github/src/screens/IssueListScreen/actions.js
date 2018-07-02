@@ -4,7 +4,10 @@ import {
   UPDATE_ISSUES_FAILED
 } from './action-types'
 
-export const updateIssuesRequested = () => ({ type: UPDATE_ISSUES_REQUESTED })
+export const updateIssuesRequested = payload => ({
+  type: UPDATE_ISSUES_REQUESTED,
+  payload
+})
 export const updateIssuesSucceeded = payload => ({
   type: UPDATE_ISSUES_SUCCEEDED,
   payload

@@ -1,21 +1,26 @@
-const baseUrl = 'https://api.github.com'
+import axios from 'axios'
 
-const issueUrl = ({ owner, repo }) => `${baseUrl}/repos/${owner}/${repo}/issues`
+const instance = axios.create({
+  baseURL: 'https://api.github.com',
+  timeout: 2000
+})
+const issueUrl = ({ owner, repo }) => `/repos/${owner}/${repo}/issues`
 
-const fetchData = url => {
-  return fetch(url)
-    .then(response => {
+const fetchData = (url, params) => {
+  console.log('fetchData', params)
+  return instance({ method: 'get', url, params: { ...params } }).then(
+    response => {
       if (response.status === 200) {
-        return response.json()
+        return response.data
       } else {
         throw new Error('Request failed: no response')
       }
-    })
-    .then(myJson => myJson)
+    }
+  )
 }
 
-const fetchIssues = () =>
-  fetchData(issueUrl({ owner: 'Alamofire', repo: 'Alamofire' }))
+const fetchIssues = state =>
+  fetchData(issueUrl({ owner: 'Alamofire', repo: 'Alamofire' }), { state })
 
 export default {
   fetchIssues

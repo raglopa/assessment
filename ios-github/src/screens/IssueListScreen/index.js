@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { Button } from 'react-native'
 import { connect } from 'react-redux'
-import { Container, Header, Content, Text } from 'native-base'
+import { Container, Content, Text } from 'native-base'
 
 import { updateIssuesRequested } from './actions'
 import IssueList from '../../components/IssueList'
@@ -9,7 +8,7 @@ import IssueList from '../../components/IssueList'
 class IssueListScreen extends Component {
   updateIssues = () => {
     console.log('updateIssues')
-    this.props.updateIssues()
+    this.props.updateIssues({ state: this.props.statusFilter })
   }
 
   componentDidMount = () => {
@@ -27,10 +26,12 @@ class IssueListScreen extends Component {
         <Content>
           {this.props.pending && <Text>loading issues...</Text>}
           {this.props.failed && <Text>something went wrong...</Text>}
-          <IssueList
-            issues={this.props.issues}
-            onIssueSelect={this.handleIssueSelect}
-          />
+          {this.props.success && (
+            <IssueList
+              issues={this.props.issues}
+              onIssueSelect={this.handleIssueSelect}
+            />
+          )}
         </Content>
       </Container>
     )
@@ -41,11 +42,12 @@ const mapStateToProps = state => ({
   issues: state.data.issues,
   pending: state.data.requestState.pending,
   failed: state.data.requestState.failed,
-  success: state.data.requestState.success
+  success: state.data.requestState.success,
+  statusFilter: state.filter.statusFilter
 })
 
 const mapDispatchToProps = dispatch => ({
-  updateIssues: () => dispatch(updateIssuesRequested())
+  updateIssues: payload => dispatch(updateIssuesRequested(payload))
 })
 
 export default connect(
