@@ -33,7 +33,3 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   }
 })
-
-// - creation date
-// - author login
-// - labels with the correct color
