@@ -1,18 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Text } from 'native-base'
 import PropTypes from 'prop-types'
 
-class LabelListItem extends Component {
-  render() {
-    const { label } = this.props
-    const color = label.color || '#000'
-    return (
-      <View style={[styles.label, { backgroundColor: color }]}>
-        <Text style={styles.labelName}>{label.name}</Text>
-      </View>
-    )
-  }
+const LabelListItem = ({ label }) => {
+  const color = `#${label.color ? label.color : '000'}`
+  return (
+    <View style={[styles.label, { backgroundColor: color }]}>
+      <Text style={styles.labelName}>{label.name}</Text>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({

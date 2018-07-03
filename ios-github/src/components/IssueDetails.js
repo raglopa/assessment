@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { StyleSheet } from 'react-native'
 import PropTypes from 'prop-types'
 import {
@@ -12,34 +12,29 @@ import {
 
 import LabelList from './LabelList'
 
-class IssueDetails extends Component {
-  render() {
-    const { issue } = this.props
-    return (
-      <Container>
-        <Content>
-          <Card>
-            <CardItem header style={styles.cardItem}>
-              <Text>{issue.title}</Text>
-            </CardItem>
-            <CardItem style={styles.cardItem}>
-              <Thumbnail small square source={{ uri: issue.user.avatar_url }} />
-              <Text style={styles.userName}> {issue.user.login} </Text>
-              <Text> opened this issue</Text>
-            </CardItem>
-            <LabelList labels={issue.labels} />
-            <CardItem style={styles.cardItem}>
-              <Text>{issue.created_at}</Text>
-            </CardItem>
-            <CardItem style={styles.cardItem}>
-              <Text>{issue.body}</Text>
-            </CardItem>
-          </Card>
-        </Content>
-      </Container>
-    )
-  }
-}
+const IssueDetails = ({ issue }) => (
+  <Container>
+    <Content>
+      <Card>
+        <CardItem header style={styles.cardItem}>
+          <Text>{issue.title}</Text>
+        </CardItem>
+        <CardItem style={styles.cardItem}>
+          <Thumbnail small square source={{ uri: issue.user.avatar_url }} />
+          <Text style={styles.userName}> {issue.user.login} </Text>
+          <Text> opened this issue</Text>
+        </CardItem>
+        <LabelList labels={issue.labels} />
+        <CardItem style={styles.cardItem}>
+          <Text>{issue.created_at}</Text>
+        </CardItem>
+        <CardItem style={styles.cardItem}>
+          <Text>{issue.body}</Text>
+        </CardItem>
+      </Card>
+    </Content>
+  </Container>
+)
 
 const styles = StyleSheet.create({
   cardItem: {
@@ -54,4 +49,5 @@ const styles = StyleSheet.create({
 IssueDetails.propTypes = {
   issue: PropTypes.object.isRequired
 }
+
 export default IssueDetails

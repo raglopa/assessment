@@ -7,7 +7,7 @@ noErrorsAllowed()
 
 describe('LabelListItem component', () => {
   it('renders without crashing', () => {
-    const label = { color: '#000' }
+    const label = { color: '000' }
     const rendered = renderer.create(<LabelListItem label={label} />).toJSON()
     expect(rendered).toBeTruthy()
   })
