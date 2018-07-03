@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { TouchableHighlight, FlatList, Text } from 'react-native'
-
+import { TouchableHighlight, FlatList } from 'react-native'
+import PropTypes from 'prop-types'
 import IssueListItem from './IssueListItem'
 
-export default class IssueList extends Component {
+class IssueList extends Component {
   render() {
     const { issues, onIssueSelect } = this.props
 
@@ -20,3 +20,10 @@ export default class IssueList extends Component {
     )
   }
 }
+
+IssueList.propTypes = {
+  issues: PropTypes.array.isRequired,
+  onIssueSelect: PropTypes.func
+}
+
+export default IssueList

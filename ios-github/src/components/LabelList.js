@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
 
 import LabelListItem from './LabelListItem'
+import PropTypes from 'prop-types'
 
-export default class LabelList extends Component {
+class LabelList extends Component {
   render() {
     const { labels } = this.props
     return (
@@ -20,3 +21,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   }
 })
+
+LabelList.propTypes = {
+  labels: PropTypes.array.isRequired
+}
+export default LabelList

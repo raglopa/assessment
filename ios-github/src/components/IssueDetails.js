@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
+import PropTypes from 'prop-types'
 import {
   Container,
   Content,
   Card,
   CardItem,
-  Body,
   Text,
   Thumbnail
 } from 'native-base'
 
 import LabelList from './LabelList'
 
-export default class IssueDetails extends Component {
+class IssueDetails extends Component {
   render() {
     const { issue } = this.props
     return (
@@ -50,3 +50,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   }
 })
+
+IssueDetails.propTypes = {
+  issue: PropTypes.object.isRequired
+}
+export default IssueDetails
