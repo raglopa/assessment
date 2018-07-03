@@ -13,7 +13,9 @@ class IssueFilter extends Component {
     return (
       <Button
         onPress={this.handleFilterChange}
-        title={`Only ${this.props.statusFilter === 'open' ? 'closed' : 'open'}`}
+        title={`Show only ${
+          this.props.statusFilter === 'open' ? 'closed' : 'open'
+        }`}
       />
     )
   }

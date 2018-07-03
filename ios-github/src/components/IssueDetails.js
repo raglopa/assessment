@@ -9,32 +9,37 @@ import {
   Text,
   Thumbnail
 } from 'native-base'
+import moment from 'moment'
 
 import LabelList from './LabelList'
 
-const IssueDetails = ({ issue }) => (
-  <Container>
-    <Content>
-      <Card>
-        <CardItem header style={styles.cardItem}>
-          <Text>{issue.title}</Text>
-        </CardItem>
-        <CardItem style={styles.cardItem}>
-          <Thumbnail small square source={{ uri: issue.user.avatar_url }} />
-          <Text style={styles.userName}> {issue.user.login} </Text>
-          <Text> opened this issue</Text>
-        </CardItem>
-        <LabelList labels={issue.labels} />
-        <CardItem style={styles.cardItem}>
-          <Text>{issue.created_at}</Text>
-        </CardItem>
-        <CardItem style={styles.cardItem}>
-          <Text>{issue.body}</Text>
-        </CardItem>
-      </Card>
-    </Content>
-  </Container>
-)
+const IssueDetails = ({ issue }) => {
+  const fromNow = moment(issue.created_at).fromNow()
+  const cratedAt = moment.utc(issue.created_at).format('YYYY-MM-DD HH:mm:ss')
+  return (
+    <Container>
+      <Content>
+        <Card>
+          <CardItem header style={styles.cardItem}>
+            <Text>{issue.title}</Text>
+          </CardItem>
+          <CardItem style={styles.cardItem}>
+            <Thumbnail small square source={{ uri: issue.user.avatar_url }} />
+            <Text style={styles.userName}> {issue.user.login} </Text>
+            <Text> opened this issue {fromNow}</Text>
+          </CardItem>
+          <LabelList labels={issue.labels} />
+          <CardItem style={styles.cardItem}>
+            <Text>Opened: {cratedAt} (UTC)</Text>
+          </CardItem>
+          <CardItem style={styles.cardItem}>
+            <Text>{issue.body}</Text>
+          </CardItem>
+        </Card>
+      </Content>
+    </Container>
+  )
+}
 
 const styles = StyleSheet.create({
   cardItem: {
