@@ -23,7 +23,7 @@ const IssueListItem = ({ issue }) => {
             <Text> opened this issue</Text>
           </View>
           <Text>{cratedAt} (UTC)</Text>
-          <LabelList labels={issue.labels} />
+          {issue.labels && <LabelList labels={issue.labels} />}
         </Body>
       </CardItem>
     </Card>

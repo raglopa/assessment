@@ -7,7 +7,7 @@ noErrorsAllowed()
 
 describe('IssueListItem component', () => {
   it('renders without crashing', () => {
-    const issue = {}
+    const issue = { user: {}, created_at: '2018-07-03' }
     const rendered = renderer.create(<IssueListItem issue={issue} />).toJSON()
     expect(rendered).toBeTruthy()
   })

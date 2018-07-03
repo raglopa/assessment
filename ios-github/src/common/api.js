@@ -18,8 +18,8 @@ const fetchData = (url, params) => {
   )
 }
 
-const fetchIssues = state =>
-  fetchData(issueUrl({ owner: 'Alamofire', repo: 'Alamofire' }), { state })
+const fetchIssues = ({ state, repo }) =>
+  fetchData(issueUrl({ owner: repo.owner, repo: repo.repo }), { state })
 
 export default {
   fetchIssues
