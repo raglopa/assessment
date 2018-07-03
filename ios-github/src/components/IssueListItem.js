@@ -12,7 +12,9 @@ const IssueListItem = ({ issue }) => {
   return (
     <Card>
       <CardItem header style={styles.header}>
-        <Text>#{issue.number}</Text>
+        <Text>
+          #{issue.number} ({issue.state})
+        </Text>
         <Text>{fromNow}</Text>
       </CardItem>
       <CardItem>

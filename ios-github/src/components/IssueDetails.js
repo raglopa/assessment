@@ -21,7 +21,9 @@ const IssueDetails = ({ issue }) => {
       <Content>
         <Card>
           <CardItem header style={styles.cardItem}>
-            <Text>{issue.title}</Text>
+            <Text>
+              {issue.title} ({issue.state})
+            </Text>
           </CardItem>
           <CardItem style={styles.cardItem}>
             <Thumbnail small square source={{ uri: issue.user.avatar_url }} />
